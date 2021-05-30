@@ -150,9 +150,9 @@ struct SobelFilter_RS : public sc_module {
                     case SOBEL_FILTER_RS_RESULT_ADDR:
                         // cout << "\n[SB] READ : count = " << countPerRow_R << endl; 
                         
-                        for(int i = 0; i < DNA_TRANS; i++ ){
+                        for(int i = 0; i < DMA_TRANS; i++ ){
                             data_ptr[i] = (unsigned char) o_data.read();
-                            // data_ptr[i] = (unsigned char) o_result_buffer[(read_count % (dataCountPerRow / 3)) * DNA_TRANS + i];
+                            // data_ptr[i] = (unsigned char) o_result_buffer[(read_count % (dataCountPerRow / 3)) * DMA_TRANS + i];
                             // cout << /*"(" << (read_count % (dataCountPerRow / 3)) << ")"<<*/ (unsigned int) data_ptr[i] << " - ";
                         } 
 
@@ -165,7 +165,7 @@ struct SobelFilter_RS : public sc_module {
                             // cout << " >> "<< out << " << " << endl;
                             countPerRow_R++;
                         }
-                        // cout << (int)o_result_buffer[DNA_TRANS * countPerRow_R] << endl;
+                        // cout << (int)o_result_buffer[DMA_TRANS * countPerRow_R] << endl;
                         break;
                     default:
                         std::cerr   << "READ Error! SobelFilter_RS::blocking_transport: address 0x"
@@ -183,7 +183,7 @@ struct SobelFilter_RS : public sc_module {
                         // cout <<  width << endl;      
                         index = 0;
                         i_width.write(width);
-                        dataCountPerRow = (width * 3) / DNA_TRANS + (((width * 3) % DNA_TRANS == 0) ? 0 : 1);
+                        dataCountPerRow = (width * 3) / DMA_TRANS + (((width * 3) % DMA_TRANS == 0) ? 0 : 1);
                         break;
                     case SOBEL_FILTER_RS_W_HEIGHT:
                         for(int i = 0; i < 4; i++ )
@@ -194,9 +194,9 @@ struct SobelFilter_RS : public sc_module {
                         max_Row_num_R = height;
                         break;
                     case SOBEL_FILTER_RS_W_DATA:
-                        for(int i = 0; i < DNA_TRANS; i++ ){
-                            i_buffer[countPerRow_W * DNA_TRANS + i] = (unsigned int) data_ptr[i];
-                            // cout << i_buffer[countPerRow_W * DNA_TRANS + i] << " ";
+                        for(int i = 0; i < DMA_TRANS; i++ ){
+                            i_buffer[countPerRow_W * DMA_TRANS + i] = (unsigned int) data_ptr[i];
+                            // cout << i_buffer[countPerRow_W * DMA_TRANS + i] << " ";
                         }
                         // cout << endl;
                         countPerRow_W ++;
