@@ -11,7 +11,7 @@
 const int MASK_N = 2;
 const int MASK_X = 3;
 const int MASK_Y = 3;
-const int DNA_TRANS = 64;
+const int DMA_TRANS = 64;
 
 // Sobel Filter inner transport addresses
 // Used between blocking_transport() & do_filter()
